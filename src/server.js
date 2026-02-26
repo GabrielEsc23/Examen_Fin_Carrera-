@@ -2,7 +2,7 @@
 import express from 'express';
 import dotnev from 'dotenv';
 import cors from 'cors';
-
+import routerUsuario from './routers/usuario_routes.js'
 // Inicializar el objeto de express
 const app= express()
 dotnev.config()
@@ -18,6 +18,10 @@ app.use(express.json())
 app.get('/',(req,res)=>{
     res.send("Server on")
 })
+
+//Rutas sistema
+app.use('/api',routerUsuario)
+
 // Rutas no encontradas
 app.use((req,res)=>res.status(404).send("Endpoint no encontrado - 404"))
 
