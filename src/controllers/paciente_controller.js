@@ -28,6 +28,40 @@ const registrarPaciente = async (req, res) => {
         res.status(500).json({ msg: "Error al registrar al Paciente" })
     }
 }
+
+
+
+
+const listarPaciente = async (req, res) => {
+    try {
+        const pacientes = await Paciente.find().select("-createdAt -updatedAt -__v")
+        res.status(200).json(pacientes)
+    } catch (error) {
+        res.status(500).json({ msg: "Error al obtener al Paciente" })
+    }
+}
+
+//  Listar por id 
+
+const detallePaciente = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ msg: `Lo sentimos, no existe el paciente con ID ${id}` })
+    }
+
+    try {
+        const paciente = await Paciente.findById(id).select("-createdAt -updatedAt -__v")
+        res.status(200).json(paciente)
+    } catch (error) {
+        res.status(500).json({ msg: "Error al obtener al paciente" })
+    }
+
+
+
+}
+
 export{
-    registrarPaciente
+    registrarPaciente,
+    listarPaciente,
+    detallePaciente
 }
