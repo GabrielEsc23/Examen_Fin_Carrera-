@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import Usuario  from '../models/usuario';
+import Usuario  from '../models/usuario.js';
 
 const verificarAutenticacion = async (req, res, next) => {
     if (!req.headers.authorization) 
